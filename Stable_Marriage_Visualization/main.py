@@ -1,5 +1,5 @@
 '''
-    Filename: StableMarriage_Visualization.py
+    Filename: main.py
     Author: Cydney Miller
     Date Created: 11/19/2025
     Last Updated: 11/19/2025

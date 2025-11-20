@@ -1,5 +1,5 @@
 '''
-    Filename: Colors.py
+    Filename: colors.py
     Author: Cydney Miller
     Date Created: 11/20/2025
     Date Updated: 11/20/2025
