@@ -178,7 +178,6 @@ def print_sources():
     print("[2]  Microsoft. Github Copilot, GPT-4.1, OpenAI, 2024. Accessed 20 Nov. 2025; Used to")
     print("format graphs and assistance with small debugging tasks.")
 
-
 def print_marriages():
     print(f"\t{bcolors.MEN}m1{bcolors.RESET} is {bcolors.PROPOSED}married{bcolors.RESET} to {bcolors.WOMEN}w3{bcolors.RESET}")
     print(f"\t{bcolors.MEN}m2{bcolors.RESET} is {bcolors.PROPOSED}married{bcolors.RESET} to {bcolors.WOMEN}w4{bcolors.RESET}")
