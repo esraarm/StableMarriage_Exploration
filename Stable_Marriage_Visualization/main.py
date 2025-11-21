@@ -1,11 +1,11 @@
-'''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     Filename: main.py
     Author: Cydney Miller
     Date Created: 11/19/2025
     Last Updated: 11/19/2025
     Purpose: Create a program that explains what the Stable Marriage Problem
              is with meaningful and educational visualizations.
-'''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 import os
 import matplotlib.pyplot as plt
 import numpy as np
@@ -68,6 +68,12 @@ def print_graphs(data):
         os.system('pause')
         print()  # Blank line between graphs
 
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Function: print_description(str)
+    Purpose:  Used in print_graphs(), this function prints a description 
+              of what is being shown with each graph. Descriptions from: 
+              https://www.ams.org/publicoutreach/feature-column/fc-2015-03.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 def print_description(graph_name):
     if graph_name == "Step 1A":
         print("\nEach man proposes to the woman he most prefers:")
@@ -101,7 +107,6 @@ def print_description(graph_name):
     else:
         print("\nWe haven't gotten there yet!\n")
         
-
 if __name__ == "__main__":
     main()
 
