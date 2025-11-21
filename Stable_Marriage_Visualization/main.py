@@ -9,8 +9,14 @@
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+from graph import GraphCell
+from colors import bcolors
+import json
 
 def main():
+    # open and load in graph.json data
+    with open("Stable_Marriage_Visualization/graphs.json", "r") as jsonFile:
+        data = json.load(jsonFile)
 
     # Introduce the purpose of the program and what it will accomplish.
     print("\nWelcome to An Explanation of the Stable Marriage Problem!")
@@ -22,8 +28,8 @@ def main():
     # Give an overview of the Stable Marriage Problem
     print_overview()
 
-    # FIXME this is just the test. Each step will need to be edited in the future
-    print_step1()
+    # Print the representative graphs and descriptions
+    print_graphs(data)
 
 def print_overview():
     print("\nOverview:")
@@ -37,61 +43,64 @@ def print_overview():
     os.system('pause')
     print("--------------------------------------------------------------------------------------")
 
-def print_step1():
-    # --- SETTINGS YOU CAN EDIT --------------------------------------
+def print_graphs(data):
+    for graph_name, graph_data in data["graphs"].items():
+        print(f"{graph_name}:")
+        cell_obj = GraphCell()
+        cell_obj.print_row_one()
+        # Define the grid order (adjust as needed for your data)
+        men = ["m1", "m2", "m3", "m4"]
+        row_keys = [["a1", "a2", "a3", "a4"], ["b1", "b2", "b3", "b4"], ["c1", "c2", "c3", "c4"], ["d1", "d2", "d3", "d4"]]
 
-    men = ["m1", "m2", "m3", "m4"]
-    women = ["w1", "w2", "w3", "w4"]
+        for row_idx, row in enumerate(row_keys):
+            cell_lines = []
+            # Add the man label as a cell (can be styled as you wish)
+            cell_lines.append(GraphCell().get_male_cell_lines(men[row_idx]))
+            for cell in row:
+                cell_data = graph_data.get(cell, {})
+                proposed = cell_data.get("proposed")
+                engaged = cell_data.get("engaged")
+                cell_obj = GraphCell(proposed, engaged)
+                cell_lines.append(cell_obj.get_cell_lines())
+            for i in range(4):  # 4 lines per cell
+                print("  ".join(cell[i] for cell in cell_lines))
+        print_description(graph_name)
+        os.system('pause')
+        print()  # Blank line between graphs
 
-    # List of (row, col) coordinates to color blue.
-    # (0,0) is the top-left cell inside the grid (after headers).
-    blue_cells = [
-        (0, 2),  # m1 - w3
-        (1, 3),  # m2 - w4
-        (2, 1),  # m3 - w2
-        (3, 1),  # m4 - w2
-    ]
-
-    # Colors
-    header_color = "#f4b942"   # gold
-    row_label_color = "#f48fb1"  # pink
-    blue_color = "#7f8cff"       # blue
-    line_color = "gray"
-
-    # ---------------------------------------------------------------
-
-    # Create 5×5 grid (1 row/col for labels, 4×4 for content)
-    fig, ax = plt.subplots(figsize=(6, 6))
-
-    # Remove ticks
-    ax.set_xticks([])
-    ax.set_yticks([])
-
-    # Draw grid lines
-    for x in range(6):
-        ax.plot([x, x], [0, 5], color=line_color, linewidth=1)
-        ax.plot([0, 5], [x, x], color=line_color, linewidth=1)
-
-    # Color column headers (women)
-    for j, w in enumerate(women):
-        ax.add_patch(plt.Rectangle((j+1, 4), 1, 1, color=header_color))
-        ax.text(j+1.5, 4.5, w, va="center", ha="center", fontsize=12)
-
-    # Color row headers (men)
-    for i, m in enumerate(men):
-        ax.add_patch(plt.Rectangle((0, 3-i), 1, 1, color=row_label_color))
-        ax.text(0.5, 3.5-i, m, va="center", ha="center", fontsize=12)
-
-    # Fill blue cells
-    for (i, j) in blue_cells:
-        ax.add_patch(plt.Rectangle((j+1, 3-i), 1, 1, color=blue_color))
-
-    # Set axis limits
-    ax.set_xlim(0, 5)
-    ax.set_ylim(0, 5)
-    ax.invert_yaxis()
-
-    plt.show()
+def print_description(graph_name):
+    if graph_name == "Step 1A":
+        print("\nEach man proposes to the woman he most prefers:")
+        print("\tm1 proposes to w1")
+        print("\tm2 proposes to w1")
+        print("\tm3 proposes to w2")
+        print("\tm4 proposes to w4\n")
+    elif graph_name == "Step 1B":
+        print("\nNotice that w1 receives proposals from m1 and m2. She")
+        print("chooses the proposal from m1 since she prefers m1 to m2.\n")
+    elif graph_name == "Step 2A":
+        print("\nSince m2 has been rejected by w1, he proposes to his second choice, w4.\n")
+    elif graph_name == "Step 2B":
+        print("\nNow w4 has proposals from m2 and m4 of which she chooses the one from m2.\n") 
+    elif graph_name == "Step 3A":
+        print("\nm4 proposes to w2...\n") 
+    elif graph_name == "Step 3B":
+        print("\nwho accepts the proposal and rejects m3.\n") 
+    elif graph_name == "Step 4A":
+        print("\nm3 proposes to w1...\n") 
+    elif graph_name == "Step 4B":
+        print("\nwho accepts the proposal and rejects m1.\n")  
+    elif graph_name == "Step 5A":
+        print("\nm1 proposes to w2...\n")  
+    elif graph_name == "Step 5B":
+        print("\nwho rejects him because she prefers her current partner, m4.\n")  
+    elif graph_name == "Step 6A":
+        print("\nm1 proposes to w3...\n")  
+    elif graph_name == "Step 6B":
+        print("\nwho accepts his proposal, which is our final marriage.\n")   
+    else:
+        print("\nWe haven't gotten there yet!\n")
+        
 
 if __name__ == "__main__":
     main()
