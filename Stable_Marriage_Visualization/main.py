@@ -2,7 +2,7 @@
     Filename: main.py
     Author: Cydney Miller
     Date Created: 11/19/2025
-    Last Updated: 11/19/2025
+    Last Updated: 11/20/2025
     Purpose: Create a program that explains what the Stable Marriage Problem
              is with meaningful and educational visualizations.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
