@@ -4,6 +4,7 @@
 This project is designed to explain and visually demonstrate the Stable Marriage Problem. The project provides educational step-by-step visualizations with color-coded segments to help users understand the concepts behind stable matching using the Gale Shapley Algorithm.
 
 ## Contents
+- `README.d`: This markdown file containing important information about the project.
 - `Visualization.ipynb`: Google Colab notebook used to execute the program.
 - `graphs.json`: Graph information needed for the visualization portion of the project.
 
